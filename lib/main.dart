@@ -7,6 +7,7 @@ import 'screens/home_screen.dart';
 import 'screens/vehicle_list_screen.dart';
 import 'screens/add_vehicle_screen.dart';
 import 'screens/refuel_history_screen.dart';
+import 'screens/add_refuel_screen.dart'; 
 import 'screens/profile_screen.dart';
 
 void main() async {
@@ -36,7 +37,8 @@ class AbastecimentoApp extends StatelessWidget {
         '/home': (context) => HomeScreen(),
         '/vehicles': (context) => VehicleListScreen(),
         '/add_vehicle': (context) => AddVehicleScreen(),
-        //'/refuels': (context) =>  RefuelHistoryScreen(),
+        '/refuels': (context) => RefuelHistoryScreen(),
+        '/add_refuel': (context) => AddRefuelScreen(), 
         '/profile': (context) => ProfileScreen(),
       },
     );

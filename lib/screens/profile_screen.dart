@@ -1,6 +1,8 @@
-import 'dart:io';  
+import 'dart:io';
 import 'package:flutter/material.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'forgot_password_screen.dart';
+import '../widgets/custom_drawer.dart'; 
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -9,16 +11,42 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final _nameController = TextEditingController();
-  String? _imagePath;  
+  String? _imagePath;
 
- 
+  @override
+  void initState() {
+    super.initState();
+    _nameController.text = FirebaseAuth.instance.currentUser?.displayName ?? '';
+  }
+
+  Future<void> _saveProfile() async {
+    try {
+      User? user = FirebaseAuth.instance.currentUser;
+
+      if (user != null) {
+        if (_nameController.text != user.displayName) {
+          await user.updateDisplayName(_nameController.text);
+        }
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Perfil salvo com sucesso!")),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Erro ao salvar perfil: $e")),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Perfil"),
+        title: Text("Perfil", style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.green,
       ),
+      drawer: CustomDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -29,14 +57,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 radius: 60,
                 backgroundColor: Colors.green,
                 backgroundImage: _imagePath != null
-                    ? FileImage(File(_imagePath!)) 
-                    : AssetImage("assets/default_profile.png") as ImageProvider,  
+                    ? FileImage(File(_imagePath!))
+                    : AssetImage("assets/default_profile.png") as ImageProvider,
                 child: _imagePath == null
                     ? Icon(
-                        Icons.camera_alt,
+                        Icons.person,  
                         size: 40,
                         color: Colors.white,
-                      )  
+                      )
                     : null,
               ),
             ),
@@ -57,11 +85,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             SizedBox(height: 32),
             ElevatedButton(
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("Perfil salvo com sucesso!")),
-                );
-              },
+              onPressed: _saveProfile,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
                 shape: RoundedRectangleBorder(
@@ -72,8 +96,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 child: Text(
                   "SALVAR PERFIL",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
+              ),
+            ),
+            SizedBox(height: 20),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ForgotPasswordScreen()),
+                );
+              },
+              child: Text(
+                "Esqueceu a senha?",
+                style: TextStyle(color: Colors.green),
               ),
             ),
           ],

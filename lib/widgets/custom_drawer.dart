@@ -8,7 +8,7 @@ class CustomDrawer extends StatelessWidget {
 
     return Drawer(
       child: Container(
-        color: Colors.green[50], // Fundo do drawer com um tom claro de verde
+        color: Colors.green[50],
         child: ListView(
           children: [
             UserAccountsDrawerHeader(
@@ -29,7 +29,7 @@ class CustomDrawer extends StatelessWidget {
                 ),
               ),
               decoration: BoxDecoration(
-                color: Colors.green, // Fundo do header
+                color: Colors.green, 
               ),
             ),
             ListTile(
@@ -72,7 +72,7 @@ class CustomDrawer extends StatelessWidget {
               ),
               onTap: () => Navigator.pushNamed(context, '/profile'),
             ),
-            Divider(color: Colors.green[200]), // Linha separadora
+            Divider(color: Colors.green[200]), 
             ListTile(
               leading: Icon(Icons.logout, color: Colors.red),
               title: Text(

@@ -1,18 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'register_screen.dart';
-
-const kPrimaryColor = Colors.green;
-const kButtonTextStyle =
-    TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white);
-const kLabelStyle = TextStyle(color: Colors.green);
-const kInputDecoration = InputDecoration(
-  labelStyle: kLabelStyle,
-  focusedBorder: UnderlineInputBorder(
-    borderSide: BorderSide(color: kPrimaryColor),
-  ),
-  prefixIcon: Icon(Icons.email, color: kPrimaryColor),
-);
+import 'forgot_password_screen.dart'; 
 
 class LoginScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -37,7 +26,8 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Login', style: TextStyle(color: Colors.white)),
-        backgroundColor: kPrimaryColor,
+        backgroundColor: Colors.green,
+        automaticallyImplyLeading: false,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -46,29 +36,44 @@ class LoginScreen extends StatelessWidget {
           children: [
             TextField(
               controller: emailController,
-              decoration: kInputDecoration.copyWith(labelText: 'E-mail'),
+              decoration: InputDecoration(
+                labelText: 'E-mail',
+                labelStyle: TextStyle(color: Colors.green),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.green),
+                ),
+                prefixIcon: Icon(Icons.email, color: Colors.green),
+              ),
               keyboardType: TextInputType.emailAddress,
             ),
             SizedBox(height: 20),
             TextField(
               controller: passwordController,
-              decoration: kInputDecoration.copyWith(
-                  labelText: 'Senha',
-                  prefixIcon: Icon(Icons.lock, color: kPrimaryColor)),
+              decoration: InputDecoration(
+                labelText: 'Senha',
+                labelStyle: TextStyle(color: Colors.green),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.green),
+                ),
+                prefixIcon: Icon(Icons.lock, color: Colors.green),
+              ),
               obscureText: true,
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed:() => _login(context),
+              onPressed: () => _login(context),
               style: ElevatedButton.styleFrom(
-                backgroundColor: kPrimaryColor,
+                backgroundColor: Colors.green,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),
-                child: Text("ENTRAR", style: kButtonTextStyle),
+                child: Text(
+                  "ENTRAR",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+                ),
               ),
             ),
             SizedBox(height: 20),
@@ -81,7 +86,20 @@ class LoginScreen extends StatelessWidget {
               },
               child: Text(
                 "Não tem uma conta? Cadastre-se",
-                style: TextStyle(color: kPrimaryColor),
+                style: TextStyle(color: Colors.green),
+              ),
+            ),
+            SizedBox(height: 20),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ForgotPasswordScreen()),
+                );
+              },
+              child: Text(
+                "Esqueceu a senha?",
+                style: TextStyle(color: Colors.green),
               ),
             ),
           ],

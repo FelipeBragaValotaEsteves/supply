@@ -1,12 +1,12 @@
 class Refuel {
-  final String vehicleId;
+  final String id;
   final double liters;
   final int currentMileage;
   final int previousMileage;
   final DateTime date;
 
   Refuel({
-    required this.vehicleId,
+    required this.id,
     required this.liters,
     required this.currentMileage,
     required this.previousMileage,

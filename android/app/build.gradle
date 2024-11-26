@@ -1,6 +1,6 @@
 plugins {
     id 'com.android.application'
-    id 'com.google.gms.google-services' // Plugin do Firebase
+    id 'com.google.gms.google-services' 
     id 'kotlin-android'
     id 'dev.flutter.flutter-gradle-plugin'
 }
@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.supply"
-        minSdkVersion 23 // Certifique-se de que esta versão seja pelo menos 23
+        minSdkVersion 23 
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutter.versionCode
         versionName flutter.versionName
@@ -28,20 +28,19 @@ android {
 
     buildTypes {
         release {
-            // Mantenha a configuração de assinatura
             signingConfig signingConfigs.debug
         }
     }
 }
 
 dependencies {
-    implementation platform('com.google.firebase:firebase-bom:32.2.2') // Firebase BOM para versão unificada
-    implementation 'com.google.firebase:firebase-auth' // Firebase Authentication
-    implementation 'com.google.firebase:firebase-firestore' // Firestore (se usado)
+    implementation platform('com.google.firebase:firebase-bom:32.2.2') 
+    implementation 'com.google.firebase:firebase-auth' 
+    implementation 'com.google.firebase:firebase-firestore' 
 }
 
 flutter {
     source '../..'
 }
 
-apply plugin: 'com.google.gms.google-services' // Sempre aplique o plugin no final do arquivo
+apply plugin: 'com.google.gms.google-services' 

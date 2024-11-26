@@ -11,62 +11,133 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Controle de Abastecimento', style: TextStyle(color: Colors.white)),
-        backgroundColor: Colors.green, 
+        title: Text('Supply', style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.green,
       ),
       drawer: CustomDrawer(),
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.green.shade200, Colors.green.shade400], 
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
+        color: Colors.white, 
+        padding: EdgeInsets.all(16),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Icon(
-                Icons.local_gas_station,
-                color: Colors.white,
-                size: 80, 
+              SizedBox(height: 20),
+              Text(
+                'Supply App',
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green, 
+                ),
               ),
               SizedBox(height: 20),
               Text(
-                'Bem-vindo, ${user?.email ?? "Usuário"}',
+                'Bem-vindo, ${user?.displayName ?? 'Usuário'}',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white, 
+                  color: Colors.black87, 
                 ),
               ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
+              SizedBox(height: 40),
+              GestureDetector(
+                onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AddVehicleScreen()), 
+                    MaterialPageRoute(builder: (context) => AddVehicleScreen()),
                   );
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
+                child: Column(
+                  children: [
+                    Icon(
+                      Icons.add_circle_outline,
+                      color: Colors.green,
+                      size: 80, 
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Adicionar Veículo',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green,
+                      ),
+                    ),
+                  ],
                 ),
-                child: Text('Adicionar Veículo', style: TextStyle(color: Colors.green))
               ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
+              SizedBox(height: 30),
+              GestureDetector(
+                onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => VehicleListScreen()), 
+                    MaterialPageRoute(builder: (context) => VehicleListScreen()),
                   );
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white, 
+                child: Column(
+                  children: [
+                    Icon(
+                      Icons.list_alt,
+                      color: Colors.green,
+                      size: 80, 
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Ver Lista de Veículos',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green,
+                      ),
+                    ),
+                  ],
                 ),
-                child: Text('Ver Lista de Veículos', style: TextStyle(color: Colors.green))
+              ),
+              SizedBox(height: 40),
+              GestureDetector(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text('Informações'),
+                        content: Text(
+                          'Versão: 1.0.0\n'
+                          'Todos os direitos reservados.\n'
+                          '© 2024 Supply App',
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text('Fechar'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+                child: Column(
+                  children: [
+                    Icon(
+                      Icons.info_outline,
+                      color: Colors.green,
+                      size: 80,
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Informações',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
